@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EMATOHO — Recruitment & Staffing</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --ink:#1C1714;--ink2:#3D3430;--ink3:#7A6E69;--ink4:#B8AEA9;
+  --cream:#F5F0E8;--cream2:#EDE7D8;--cream3:#E0D8C8;
+  --terra:#C4511A;--terra2:#9E3F12;--terra3:#F0D4C4;
+  --white:#FDFAF5;
+  --border:#D8D0C4;--border2:#C8BEB2;
+  --success:#1D6B4A;--danger:#A83220;
+  --r:10px;--rl:16px;
+}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);min-height:100vh;font-size:15px;line-height:1.6}
+
+/* ── NAV ── */
+nav{background:var(--ink);display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;height:68px;position:sticky;top:0;z-index:200}
+.logo{display:flex;align-items:center;gap:14px;cursor:pointer;text-decoration:none}
+.logo-sigil{width:40px;height:40px;background:var(--terra);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--white);letter-spacing:-1px}
+.logo-wordmark{color:var(--white)}
+.logo-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;letter-spacing:4px;display:block;line-height:1}
+.logo-tagline{font-size:10px;letter-spacing:3px;color:var(--ink4);text-transform:uppercase;display:block;margin-top:2px}
+.nav-center{display:flex;gap:2px}
+.nav-btn{background:none;border:none;color:rgba(255,255,255,0.55);padding:8px 16px;cursor:pointer;font-size:13px;font-family:'DM Sans',sans-serif;letter-spacing:0.5px;transition:color 0.2s;text-transform:uppercase}
+.nav-btn:hover,.nav-btn.active{color:var(--terra)}
+.btn-admin{background:none;border:1px solid rgba(196,81,26,0.5);color:var(--terra);padding:8px 20px;cursor:pointer;font-size:12px;font-family:'DM Sans',sans-serif;letter-spacing:1.5px;text-transform:uppercase;transition:all 0.2s}
+.btn-admin:hover{background:var(--terra);color:var(--white);border-color:var(--terra)}
+
+/* ── PAGES ── */
+.page{display:none}
+.page.active{display:block}
+
+/* ── HERO ── */
+.hero{background:var(--ink);min-height:480px;display:grid;grid-template-columns:1fr 1fr;overflow:hidden}
+.hero-left{padding:5rem 3rem 4rem;display:flex;flex-direction:column;justify-content:center}
+.hero-eyebrow{font-size:11px;letter-spacing:4px;color:var(--terra);text-transform:uppercase;margin-bottom:1.5rem;display:flex;align-items:center;gap:10px}
+.hero-eyebrow::before{content:'';display:block;width:32px;height:1px;background:var(--terra)}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:4rem;font-weight:300;color:var(--white);line-height:1.1;margin-bottom:1.5rem}
+.hero h1 em{color:var(--terra);font-style:italic}
+.hero-body{color:rgba(255,255,255,0.5);font-size:15px;line-height:1.8;max-width:420px;margin-bottom:2.5rem}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+.btn-primary{background:var(--terra);border:none;color:var(--white);padding:14px 28px;cursor:pointer;font-size:13px;font-family:'DM Sans',sans-serif;letter-spacing:1px;text-transform:uppercase;transition:all 0.2s}
+.btn-primary:hover{background:var(--terra2)}
+.btn-ghost{background:none;border:1px solid rgba(255,255,255,0.25);color:rgba(255,255,255,0.7);padding:14px 28px;cursor:pointer;font-size:13px;font-family:'DM Sans',sans-serif;letter-spacing:1px;text-transform:uppercase;transition:all 0.2s}
+.btn-ghost:hover{border-color:var(--terra);color:var(--terra)}
+.hero-right{background:var(--ink2);display:flex;flex-direction:column;justify-content:flex-end;padding:3rem;gap:1px}
+.hero-stat-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px}
+.hero-stat{background:rgba(255,255,255,0.04);padding:1.5rem 1.25rem}
+.hero-stat-num{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:300;color:var(--terra);line-height:1;display:block}
+.hero-stat-label{font-size:11px;color:rgba(255,255,255,0.35);letter-spacing:2px;text-transform:uppercase;margin-top:4px;display:block}
+
+/* ── SEARCH BAR ── */
+.search-bar{background:var(--white);border-bottom:1px solid var(--border);padding:1.25rem 2.5rem;position:sticky;top:68px;z-index:100}
+.search-inner{max-width:1000px;margin:0 auto;display:flex;gap:10px}
+.s-input{flex:1;padding:10px 16px;border:1px solid var(--border);background:var(--cream);color:var(--ink);font-size:14px;font-family:'DM Sans',sans-serif;outline:none;transition:border-color 0.2s}
+.s-input:focus{border-color:var(--terra)}
+.s-select{padding:10px 14px;border:1px solid var(--border);background:var(--cream);color:var(--ink);font-size:13px;font-family:'DM Sans',sans-serif;cursor:pointer;max-width:160px;outline:none}
+.btn-search{background:var(--ink);border:none;color:var(--white);padding:10px 24px;cursor:pointer;font-size:12px;font-family:'DM Sans',sans-serif;letter-spacing:1.5px;text-transform:uppercase;white-space:nowrap;transition:background 0.2s}
+.btn-search:hover{background:var(--terra)}
+
+/* ── BOARD ── */
+.board{max-width:1000px;margin:0 auto;padding:2.5rem 2rem}
+.board-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:2rem;border-bottom:1px solid var(--border);padding-bottom:1rem}
+.board-head h2{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:400}
+.board-count{font-size:13px;color:var(--ink3);letter-spacing:0.5px}
+.jobs-list{display:flex;flex-direction:column;gap:2px}
+
+/* ── JOB CARD ── */
+.job-card{background:var(--white);border:1px solid var(--border);cursor:pointer;display:grid;grid-template-columns:1fr auto;align-items:center;gap:1rem;padding:1.5rem 2rem;transition:all 0.2s;position:relative}
+.job-card::after{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--terra);transform:scaleY(0);transform-origin:bottom;transition:transform 0.25s}
+.job-card:hover{border-color:var(--terra);background:var(--cream)}
+.job-card:hover::after{transform:scaleY(1)}
+.jc-company{font-size:11px;color:var(--ink3);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px}
+.jc-title{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:var(--ink);margin-bottom:8px}
+.jc-tags{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.tag{font-size:11px;padding:3px 10px;letter-spacing:0.5px;font-weight:400}
+.tag-type{background:var(--cream2);color:var(--ink2)}
+.tag-loc{background:var(--terra3);color:var(--terra2)}
+.tag-ind{background:#E8EDF5;color:#2A4A7F}
+.tag-urgent{background:#FAEAE6;color:var(--danger)}
+.jc-right{display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.deadline-box{text-align:center;border:1px solid var(--border);padding:10px 16px;min-width:80px}
+.deadline-num{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:400;line-height:1;color:var(--ink);display:block}
+.deadline-num.urgent{color:var(--danger)}
+.deadline-lbl{font-size:10px;color:var(--ink4);letter-spacing:2px;text-transform:uppercase;display:block}
+.jc-salary{font-size:12px;color:var(--ink3)}
+.jc-salary strong{color:var(--ink);font-size:13px}
+.btn-apply{background:var(--ink);border:none;color:var(--white);padding:8px 20px;cursor:pointer;font-size:11px;font-family:'DM Sans',sans-serif;letter-spacing:1.5px;text-transform:uppercase;transition:all 0.2s;white-space:nowrap}
+.btn-apply:hover{background:var(--terra)}
+.btn-ext{background:none;border:1px solid var(--border);color:var(--ink2);padding:8px 20px;cursor:pointer;font-size:11px;font-family:'DM Sans',sans-serif;letter-spacing:1px;text-transform:uppercase;transition:all 0.2s;white-space:nowrap}
+.btn-ext:hover{border-color:var(--terra);color:var(--terra)}
+
+/* ── EMPTY STATE ── */
+.empty{text-align:center;padding:5rem 2rem;color:var(--ink3)}
+.empty i{font-size:40px;display:block;margin-bottom:1rem;opacity:0.3}
+
+/* ── MODAL SYSTEM ── */
+.overlay{display:none;position:fixed;inset:0;background:rgba(28,23,20,0.7);z-index:500;overflow-y:auto;padding:3rem 1rem}
+.overlay.open{display:block}
+.modal{background:var(--white);max-width:640px;margin:0 auto;padding:2.5rem;position:relative}
+.modal-lg{max-width:720px}
+.modal-close{position:absolute;top:1.25rem;right:1.25rem;background:none;border:none;cursor:pointer;color:var(--ink3);font-size:18px;transition:color 0.2s}
+.modal-close:hover{color:var(--terra)}
+.modal-eyebrow{font-size:11px;letter-spacing:3px;color:var(--terra);text-transform:uppercase;margin-bottom:0.75rem}
+.modal h2{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:400;margin-bottom:0.25rem}
+.modal-sub{color:var(--ink3);font-size:13px;margin-bottom:1.5rem;letter-spacing:0.5px}
+.modal-section{margin-bottom:1.25rem}
+.modal-section h4{font-size:11px;font-weight:500;color:var(--ink3);text-transform:uppercase;letter-spacing:2px;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+.modal-section p,.modal-section li{font-size:14px;color:var(--ink2);line-height:1.8}
+.modal-section ul{padding-left:1.2rem}
+.modal-divider{border:none;border-top:1px solid var(--border);margin:1.5rem 0}
+.modal-meta{display:grid;grid-template-columns:1fr 1fr;gap:1rem;background:var(--cream);padding:1.25rem;margin-bottom:1.5rem}
+.meta-item label{font-size:11px;color:var(--ink3);letter-spacing:1.5px;text-transform:uppercase;display:block;margin-bottom:3px}
+.meta-item strong{font-size:15px;color:var(--ink)}
+
+/* ── FORMS ── */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.fg{margin-bottom:1rem}
+.fg label{display:block;font-size:12px;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.fg input,.fg textarea,.fg select{width:100%;padding:10px 14px;border:1px solid var(--border);background:var(--cream);color:var(--ink);font-size:14px;font-family:'DM Sans',sans-serif;outline:none;transition:border-color 0.2s}
+.fg input:focus,.fg textarea:focus,.fg select:focus{border-color:var(--terra)}
+.btn-submit{width:100%;background:var(--terra);border:none;color:var(--white);padding:15px;font-size:13px;font-family:'DM Sans',sans-serif;letter-spacing:2px;text-transform:uppercase;cursor:pointer;margin-top:0.5rem;transition:background 0.2s}
+.btn-submit:hover{background:var(--terra2)}
+
+/* ── ADMIN ── */
+.admin-gate{max-width:400px;margin:5rem auto;padding:0 1rem}
+.gate-box{background:var(--white);border:1px solid var(--border);padding:2.5rem}
+.gate-box h2{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:400;margin-bottom:0.25rem}
+.gate-box p{color:var(--ink3);font-size:13px;margin-bottom:2rem}
+
+.admin-body{max-width:1100px;margin:0 auto;padding:2rem 1.5rem}
+.admin-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem}
+.admin-top h2{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:400}
+.admin-top-right{display:flex;gap:10px}
+.btn-sm{background:var(--terra);border:none;color:var(--white);padding:9px 18px;cursor:pointer;font-size:12px;font-family:'DM Sans',sans-serif;letter-spacing:1px;text-transform:uppercase;transition:background 0.2s}
+.btn-sm:hover{background:var(--terra2)}
+.btn-sm-out{background:none;border:1px solid var(--border);color:var(--ink2);padding:9px 18px;cursor:pointer;font-size:12px;font-family:'DM Sans',sans-serif;letter-spacing:1px;text-transform:uppercase;transition:all 0.2s}
+.btn-sm-out:hover{border-color:var(--terra);color:var(--terra)}
+
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-bottom:2rem;background:var(--border)}
+.kpi{background:var(--white);padding:1.25rem 1.5rem}
+.kpi-val{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:300;color:var(--ink);line-height:1}
+.kpi-val.terra{color:var(--terra)}
+.kpi-label{font-size:11px;color:var(--ink3);letter-spacing:2px;text-transform:uppercase;margin-top:4px}
+
+.tab-bar{display:flex;border-bottom:2px solid var(--border);margin-bottom:1.5rem}
+.tab{background:none;border:none;border-bottom:2px solid transparent;margin-bottom:-2px;padding:10px 24px;cursor:pointer;font-size:13px;font-family:'DM Sans',sans-serif;color:var(--ink3);letter-spacing:0.5px;transition:all 0.2s}
+.tab.active{color:var(--terra);border-bottom-color:var(--terra)}
+.tab:hover{color:var(--ink)}
+
+.panel{display:none}
+.panel.active{display:block}
+.section-box{background:var(--white);border:1px solid var(--border);padding:1.5rem;margin-bottom:1rem}
+.section-box-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
+.section-box-head h3{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600}
+
+/* add job form */
+.add-form{display:none;background:var(--cream);border:1px solid var(--border);padding:1.5rem;margin-bottom:1rem}
+.add-form.open{display:block}
+.add-form-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem}
+.add-form-head h3{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600}
+.close-btn{background:none;border:none;cursor:pointer;color:var(--ink3);font-size:18px}
+
+/* ── ADMIN TABLE ── */
+.atable{width:100%;border-collapse:collapse;font-size:13px}
+.atable th{text-align:left;padding:8px 12px;color:var(--ink3);font-weight:500;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;border-bottom:2px solid var(--border)}
+.atable td{padding:12px;border-bottom:1px solid var(--cream3);vertical-align:middle;color:var(--ink2)}
+.atable tr:last-child td{border-bottom:none}
+.atable tr:hover td{background:var(--cream)}
+.badge{display:inline-block;padding:3px 10px;font-size:11px;letter-spacing:0.5px}
+.badge-active{background:#E5F0E9;color:#1D6B4A}
+.badge-expired{background:#FAECE6;color:var(--danger)}
+.badge-pending{background:#FAF2E0;color:#7A5700}
+.badge-screened{background:#E6EDF8;color:#2A4A7F}
+.td-acts{display:flex;gap:6px}
+.btn-icon{background:none;border:1px solid var(--border);color:var(--ink3);width:32px;height:32px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;font-size:14px;transition:all 0.2s}
+.btn-icon:hover{border-color:var(--terra);color:var(--terra)}
+.btn-icon.danger:hover{border-color:var(--danger);color:var(--danger)}
+.btn-screen{background:none;border:1px solid var(--border);color:var(--ink2);padding:5px 12px;cursor:pointer;font-size:11px;font-family:'DM Sans',sans-serif;letter-spacing:1px;text-transform:uppercase;transition:all 0.2s}
+.btn-screen:hover{border-color:var(--terra);color:var(--terra)}
+
+/* ── AI SCREENING ── */
+.sr-item{border:1px solid var(--border);padding:1.25rem;margin-bottom:8px;background:var(--cream)}
+.sr-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
+.sr-name{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:var(--ink)}
+.sr-rank{font-size:11px;color:var(--ink3);letter-spacing:1px;text-transform:uppercase}
+.sr-score{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:300;padding:6px 14px;border:1px solid var(--border);min-width:70px;text-align:center;line-height:1}
+.sr-score.hi{color:var(--success);border-color:#B0D5C0}
+.sr-score.md{color:var(--terra);border-color:#E0C0A8}
+.sr-score.lo{color:var(--danger);border-color:#E0B0B0}
+.sr-rec{font-size:13px;color:var(--ink2);margin-bottom:8px;font-style:italic}
+.sr-bar{height:2px;background:var(--cream3)}
+.sr-fill{height:100%;transition:width 0.8s ease}
+.sr-fill.hi{background:var(--success)}
+.sr-fill.md{background:var(--terra)}
+.sr-fill.lo{background:var(--danger)}
+.loading-row{display:flex;gap:6px;align-items:center;padding:1.5rem 0;color:var(--ink3);font-size:13px;font-style:italic}
+.pulse{width:6px;height:6px;border-radius:50%;background:var(--terra);animation:pls 1.2s infinite}
+.pulse:nth-child(2){animation-delay:0.2s}
+.pulse:nth-child(3){animation-delay:0.4s}
+@keyframes pls{0%,80%,100%{transform:scale(0.5);opacity:0.3}40%{transform:scale(1);opacity:1}}
+
+/* ── INVOICE ── */
+.invoice-preview{margin-top:1.5rem;display:none;background:var(--white);border:1px solid var(--border);padding:2.5rem}
+.inv-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:2px solid var(--ink)}
+.inv-logo-text{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:600;letter-spacing:4px;color:var(--ink)}
+.inv-logo-sub{font-size:11px;color:var(--ink3);letter-spacing:2px;text-transform:uppercase;margin-top:2px}
+.inv-meta{text-align:right;font-size:13px;color:var(--ink2);line-height:2}
+.inv-table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:13px}
+.inv-table th{text-align:left;padding:8px 12px;background:var(--cream);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink3);border-bottom:1px solid var(--border)}
+.inv-table td{padding:12px;border-bottom:1px solid var(--cream3)}
+.inv-total-row{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--terra);text-align:right;padding-top:1rem}
+.inv-footer{margin-top:2rem;padding-top:1rem;border-top:1px solid var(--border);font-size:11px;color:var(--ink3);text-align:center;letter-spacing:1px}
+
+/* ── STATIC PAGES ── */
+.page-wrap{max-width:900px;margin:3rem auto;padding:0 2rem}
+.pg-eyebrow{font-size:11px;letter-spacing:4px;color:var(--terra);text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;gap:10px}
+.pg-eyebrow::before{content:'';display:block;width:24px;height:1px;background:var(--terra)}
+.pg-h1{font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:300;line-height:1.15;margin-bottom:1.25rem;color:var(--ink)}
+.pg-body{color:var(--ink2);font-size:15px;line-height:1.9;max-width:680px}
+.service-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:2.5rem;background:var(--border)}
+.service-card{background:var(--white);padding:2rem}
+.service-card i{font-size:24px;color:var(--terra);margin-bottom:1rem;display:block}
+.service-card strong{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;display:block;margin-bottom:6px}
+.service-card p{font-size:13px;color:var(--ink3);line-height:1.7;margin-bottom:8px}
+.service-price{font-size:13px;font-weight:500;color:var(--terra);letter-spacing:0.5px}
+.about-pull{font-family:'Cormorant Garamond',serif;font-size:1.75rem;font-weight:300;font-style:italic;color:var(--ink);border-left:3px solid var(--terra);padding-left:1.5rem;margin:2.5rem 0;line-height:1.4}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:2rem;right:2rem;background:var(--ink);color:var(--white);padding:14px 22px;font-size:13px;z-index:9999;transform:translateY(80px);opacity:0;transition:all 0.3s;letter-spacing:0.5px;max-width:320px}
+.toast.show{transform:translateY(0);opacity:1}
+.toast.ok{background:var(--success)}
+.toast.err{background:var(--danger)}
+
+@media print{nav,.search-bar,.btn-submit,button{display:none}body{background:white}}
+</style>
+
+<nav>
+  <div class="logo" onclick="goto('home')">
+    <div class="logo-sigil">E</div>
+    <div class="logo-wordmark">
+      <span class="logo-name">EMATOHO</span>
+      <span class="logo-tagline">Recruitment & Staffing</span>
+    </div>
+  </div>
+  <div class="nav-center">
+    <button class="nav-btn active" id="nb-home" onclick="goto('home');navActive(this)">Jobs</button>
+    <button class="nav-btn" id="nb-about" onclick="goto('about');navActive(this)">About</button>
+    <button class="nav-btn" id="nb-services" onclick="goto('services');navActive(this)">Services</button>
+    <button class="nav-btn" id="nb-contact" onclick="goto('contact');navActive(this)">Contact</button>
+  </div>
+  <button class="btn-admin" onclick="goto('admin')"><i class="ti ti-lock" style="margin-right:6px;font-size:13px"></i>Admin</button>
+</nav>
+
+<!-- ══════════ HOME ══════════ -->
+<div id="pg-home" class="page active">
+
+  <div class="hero">
+    <div class="hero-left">
+      <div class="hero-eyebrow">Eswatini's Premier Recruitment Platform</div>
+      <h1>Where African<br><em>Talent</em> Meets<br>Opportunity</h1>
+      <p class="hero-body">EMATOHO — meaning <em>work</em> in siSwati — connects skilled professionals with leading employers across Eswatini and beyond. Precise. Trusted. Yours.</p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="document.querySelector('.search-bar').scrollIntoView({behavior:'smooth'})"><i class="ti ti-search" style="margin-right:8px"></i>Browse Positions</button>
+        <button class="btn-ghost" onclick="goto('services');navActive(document.getElementById('nb-services'))">For Employers</button>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div style="font-size:11px;color:rgba(255,255,255,0.25);letter-spacing:3px;text-transform:uppercase;margin-bottom:1.5rem">Platform at a glance</div>
+      <div class="hero-stat-row">
+        <div class="hero-stat"><span class="hero-stat-num" id="hs-active">0</span><span class="hero-stat-label">Active jobs</span></div>
+        <div class="hero-stat"><span class="hero-stat-num" id="hs-cos">0</span><span class="hero-stat-label">Companies</span></div>
+        <div class="hero-stat"><span class="hero-stat-num" id="hs-apps">0</span><span class="hero-stat-label">Applications</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="search-bar">
+    <div class="search-inner">
+      <input class="s-input" id="sq" placeholder="Job title, keyword, company…" oninput="filterJobs()">
+      <select class="s-select" id="sf-country" onchange="filterJobs()">
+        <option value="">All countries</option>
+        <option>Eswatini</option>
+        <option>South Africa</option>
+        <option>International</option>
+      </select>
+      <select class="s-select" id="sf-type" onchange="filterJobs()">
+        <option value="">All types</option>
+        <option>Full-time</option>
+        <option>Part-time</option>
+        <option>Contract</option>
+        <option>Internship</option>
+      </select>
+      <select class="s-select" id="sf-ind" onchange="filterJobs()">
+        <option value="">All industries</option>
+        <option>Built Environment</option>
+        <option>Finance</option>
+        <option>Healthcare</option>
+        <option>Technology</option>
+        <option>Government</option>
+      </select>
+      <button class="btn-search" onclick="filterJobs()">Search</button>
+    </div>
+  </div>
+
+  <div class="board">
+    <div class="board-head">
+      <h2>Open Positions</h2>
+      <span class="board-count" id="jcount">—</span>
+    </div>
+    <div class="jobs-list" id="jobs-list"></div>
+  </div>
+</div>
+
+<!-- ══════════ ABOUT ══════════ -->
+<div id="pg-about" class="page">
+  <div class="page-wrap" style="padding-top:4rem;padding-bottom:4rem">
+    <div class="pg-eyebrow">About EMATOHO</div>
+    <h1 class="pg-h1">Born from experience.<br>Built for Eswatini.</h1>
+    <p class="pg-body">EMATOHO — meaning <em>work</em> in siSwati — was founded by a Built Environment professional with 15 years of infrastructure management experience at an international airport. Having navigated the challenges of professional growth firsthand, EMATOHO was built to be the bridge that candidates and employers deserve.</p>
+    <div class="about-pull">"We combine human expertise with AI precision to deliver shortlists HR teams can trust."</div>
+    <p class="pg-body">Operating under a registered investment company and grounded in Eswatini, EMATOHO serves local companies, government bodies, and international employers seeking African talent — with full-service recruitment from listing through placement.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:2.5rem;background:var(--border)">
+      <div style="background:var(--white);padding:2rem">
+        <i class="ti ti-target" style="font-size:22px;color:var(--terra);display:block;margin-bottom:10px" aria-hidden="true"></i>
+        <strong style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;display:block;margin-bottom:6px">Our Mission</strong>
+        <p style="font-size:13px;color:var(--ink3);line-height:1.7">Connect the right talent to the right opportunity with speed, accuracy and integrity.</p>
+      </div>
+      <div style="background:var(--white);padding:2rem">
+        <i class="ti ti-eye" style="font-size:22px;color:var(--terra);display:block;margin-bottom:10px" aria-hidden="true"></i>
+        <strong style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;display:block;margin-bottom:6px">Our Vision</strong>
+        <p style="font-size:13px;color:var(--ink3);line-height:1.7">To be the most trusted recruitment partner in Eswatini and the region.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ SERVICES ══════════ -->
+<div id="pg-services" class="page">
+  <div class="page-wrap" style="padding-top:4rem;padding-bottom:4rem">
+    <div class="pg-eyebrow">What We Offer</div>
+    <h1 class="pg-h1">Recruitment solutions<br>built to deliver.</h1>
+    <p class="pg-body">From a single vacancy post to full executive search — EMATOHO handles every stage of your hiring cycle with precision and discretion.</p>
+    <div class="service-grid">
+      <div class="service-card">
+        <i class="ti ti-file-description" aria-hidden="true"></i>
+        <strong>Job Listing</strong>
+        <p>Post your vacancy and receive applications through EMATOHO's platform. Auto-expires on deadline — no stale listings, ever.</p>
+        <span class="service-price">From E500 per post</span>
+      </div>
+      <div class="service-card">
+        <i class="ti ti-brain" aria-hidden="true"></i>
+        <strong>AI Screening & Shortlist</strong>
+        <p>Every applicant screened against your minimum requirements. You receive a ranked, scored shortlist ready to send to HR.</p>
+        <span class="service-price">From E3,000 per report</span>
+      </div>
+      <div class="service-card">
+        <i class="ti ti-users" aria-hidden="true"></i>
+        <strong>Headhunting</strong>
+        <p>We actively source and approach qualified candidates from our network for senior or specialist roles you can't fill passively.</p>
+        <span class="service-price">Custom quote</span>
+      </div>
+      <div class="service-card">
+        <i class="ti ti-plane" aria-hidden="true"></i>
+        <strong>International Placement</strong>
+        <p>Connecting Eswatini professionals with international employers and facilitating cross-border recruitment end to end.</p>
+        <span class="service-price">8–15% of first year salary</span>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:2.5rem">
+      <button class="btn-primary" onclick="goto('contact');navActive(document.getElementById('nb-contact'))">Request a Quote</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ CONTACT ══════════ -->
+<div id="pg-contact" class="page">
+  <div style="max-width:640px;margin:4rem auto;padding:0 2rem">
+    <div class="pg-eyebrow">Get In Touch</div>
+    <h1 class="pg-h1" style="font-size:2.5rem">Let's work<br>together.</h1>
+    <div style="background:var(--white);border:1px solid var(--border);padding:2.5rem;margin-top:2rem">
+      <div class="form-grid">
+        <div class="fg"><label>Name</label><input type="text" placeholder="Full name"></div>
+        <div class="fg"><label>Company</label><input type="text" placeholder="Organisation"></div>
+      </div>
+      <div class="form-grid">
+        <div class="fg"><label>Email</label><input type="email" placeholder="your@email.com"></div>
+        <div class="fg"><label>Phone</label><input type="tel" placeholder="+268 …"></div>
+      </div>
+      <div class="fg"><label>Enquiry type</label>
+        <select><option>I want to post a job</option><option>AI screening report</option><option>Headhunting service</option><option>International placement</option><option>General enquiry</option></select>
+      </div>
+      <div class="fg"><label>Message</label><textarea rows="4" placeholder="Tell us about your needs…"></textarea></div>
+      <button class="btn-submit" onclick="toast('Message sent — we will be in touch within 24 hours.','ok')">Send Message</button>
+      <div style="margin-top:1.5rem;display:flex;gap:2rem;font-size:13px;color:var(--ink3);padding-top:1.25rem;border-top:1px solid var(--border)">
+        <span><i class="ti ti-mail" style="color:var(--terra);margin-right:6px"></i>simconptyltd@gmail.com</span>
+        <span><i class="ti ti-phone" style="color:var(--terra);margin-right:6px"></i>+268 7613 7401</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ ADMIN ══════════ -->
+<div id="pg-admin" class="page">
+  <div id="admin-gate" class="admin-gate">
+    <div class="gate-box">
+      <div style="font-size:11px;letter-spacing:3px;color:var(--terra);text-transform:uppercase;margin-bottom:0.75rem">Restricted Access</div>
+      <h2>Admin Portal</h2>
+      <p>EMATOHO internal dashboard — authorised personnel only.</p>
+      <div class="fg"><label>Password</label><input type="password" id="admin-pw" placeholder="Enter password" onkeydown="if(event.key==='Enter')doLogin()"></div>
+      <button class="btn-submit" onclick="doLogin()">Sign In</button>
+      <p style="font-size:12px;color:var(--ink4);margin-top:1rem;text-align:center">Demo password: <code>WB@Admin2025</code></p>
+    </div>
+  </div>
+
+  <div id="admin-dash" style="display:none">
+    <div class="admin-body">
+      <div class="admin-top">
+        <div>
+          <h2>Dashboard</h2>
+          <p style="font-size:13px;color:var(--ink3)" id="dash-date"></p>
+        </div>
+        <div class="admin-top-right">
+          <button class="btn-sm-out" onclick="openOverlay('inv-overlay')"><i class="ti ti-receipt" style="margin-right:6px"></i>New Invoice</button>
+          <button class="btn-sm" onclick="openAddForm()"><i class="ti ti-plus" style="margin-right:6px"></i>Post a Job</button>
+        </div>
+      </div>
+
+      <div class="kpi-grid">
+        <div class="kpi"><div class="kpi-val terra" id="kpi-active">0</div><div class="kpi-label">Active jobs</div></div>
+        <div class="kpi"><div class="kpi-val" id="kpi-expired">0</div><div class="kpi-label">Expired</div></div>
+        <div class="kpi"><div class="kpi-val" id="kpi-apps">0</div><div class="kpi-label">Applications</div></div>
+        <div class="kpi"><div class="kpi-val" id="kpi-clients">0</div><div class="kpi-label">Client companies</div></div>
+      </div>
+
+      <div class="tab-bar">
+        <button class="tab active" onclick="switchTab(this,'tp-jobs')">Job Listings</button>
+        <button class="tab" onclick="switchTab(this,'tp-apps')">Applications</button>
+        <button class="tab" onclick="switchTab(this,'tp-invoices')">Invoices</button>
+      </div>
+
+      <!-- JOBS PANEL -->
+      <div class="panel active" id="tp-jobs">
+        <div class="add-form" id="add-form">
+          <div class="add-form-head">
+            <h3>Post New Job</h3>
+            <button class="close-btn" onclick="closeAddForm()"><i class="ti ti-x"></i></button>
+          </div>
+          <div class="form-grid">
+            <div class="fg"><label>Job Title *</label><input id="nj-title" placeholder="e.g. Civil Engineer"></div>
+            <div class="fg"><label>Client / Company *</label><input id="nj-co" placeholder="e.g. RSSC"></div>
+          </div>
+          <div class="form-grid">
+            <div class="fg"><label>Location</label><input id="nj-loc" placeholder="e.g. Mbabane"></div>
+            <div class="fg"><label>Country</label><select id="nj-country"><option>Eswatini</option><option>South Africa</option><option>International</option></select></div>
+          </div>
+          <div class="form-grid">
+            <div class="fg"><label>Job Type</label><select id="nj-type"><option>Full-time</option><option>Part-time</option><option>Contract</option><option>Internship</option></select></div>
+            <div class="fg"><label>Industry</label><select id="nj-ind"><option>Built Environment</option><option>Finance</option><option>Healthcare</option><option>Technology</option><option>Government</option><option>Other</option></select></div>
+          </div>
+          <div class="form-grid">
+            <div class="fg"><label>Salary / Range</label><input id="nj-sal" placeholder="e.g. E22,000–E30,000/month"></div>
+            <div class="fg"><label>Closing Date *</label><input type="date" id="nj-dl"></div>
+          </div>
+          <div class="fg"><label>Role Description</label><textarea id="nj-desc" rows="3" placeholder="Summary of responsibilities…"></textarea></div>
+          <div class="fg"><label>Minimum Requirements (one per line)</label><textarea id="nj-reqs" rows="3" placeholder="BSc Civil Engineering&#10;5+ years experience&#10;Driver's licence"></textarea></div>
+          <div class="form-grid">
+            <div class="fg"><label>Application Method</label><select id="nj-method" onchange="toggleExt()"><option value="internal">Apply through EMATOHO</option><option value="external">Redirect to company website</option></select></div>
+            <div class="fg" id="ext-wrap" style="display:none"><label>External URL</label><input id="nj-exturl" placeholder="https://…"></div>
+          </div>
+          <button class="btn-submit" onclick="saveJob()">Post Job</button>
+        </div>
+
+        <div class="section-box">
+          <div class="section-box-head"><h3>All Listings</h3></div>
+          <div id="admin-jobs"></div>
+        </div>
+      </div>
+
+      <!-- APPLICATIONS PANEL -->
+      <div class="panel" id="tp-apps">
+        <div class="section-box">
+          <div class="section-box-head">
+            <h3>Applications</h3>
+            <select id="app-filter" onchange="renderAdminApps()" style="padding:7px 12px;border:1px solid var(--border);background:var(--cream);font-size:13px;font-family:'DM Sans',sans-serif;color:var(--ink)">
+              <option value="">All jobs</option>
+            </select>
+          </div>
+          <div id="admin-apps"></div>
+        </div>
+      </div>
+
+      <!-- INVOICES PANEL -->
+      <div class="panel" id="tp-invoices">
+        <div class="section-box">
+          <div class="section-box-head"><h3>Invoice History</h3><button class="btn-sm" onclick="openOverlay('inv-overlay')"><i class="ti ti-plus" style="margin-right:6px"></i>New Invoice</button></div>
+          <div id="admin-invs"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ OVERLAYS ══ -->
+
+<!-- Job Detail -->
+<div class="overlay" id="job-overlay">
+  <div class="modal">
+    <button class="modal-close" onclick="closeOverlay('job-overlay')"><i class="ti ti-x"></i></button>
+    <div id="job-modal-body"></div>
+  </div>
+</div>
+
+<!-- Apply -->
+<div class="overlay" id="apply-overlay">
+  <div class="modal">
+    <button class="modal-close" onclick="closeOverlay('apply-overlay')"><i class="ti ti-x"></i></button>
+    <div class="modal-eyebrow">Apply for Position</div>
+    <h2 id="apl-title">—</h2>
+    <p class="modal-sub" id="apl-co">—</p>
+    <div class="form-grid">
+      <div class="fg"><label>First Name *</label><input id="a-fn" placeholder="First name"></div>
+      <div class="fg"><label>Last Name *</label><input id="a-ln" placeholder="Last name"></div>
+    </div>
+    <div class="form-grid">
+      <div class="fg"><label>Email *</label><input id="a-em" type="email" placeholder="your@email.com"></div>
+      <div class="fg"><label>Phone *</label><input id="a-ph" placeholder="+268 …"></div>
+    </div>
+    <div class="form-grid">
+      <div class="fg"><label>Highest Qualification</label><select id="a-qual"><option>Certificate / Diploma</option><option>Bachelor's Degree</option><option>Honours</option><option>Master's Degree</option><option>PhD</option></select></div>
+      <div class="fg"><label>Years of Experience *</label><select id="a-exp"><option>0–1 years</option><option>1–3 years</option><option>3–5 years</option><option>5–10 years</option><option>10+ years</option></select></div>
+    </div>
+    <div class="fg"><label>Current / Most Recent Role</label><input id="a-role" placeholder="e.g. Civil Engineer"></div>
+    <div class="fg"><label>Why are you a strong fit? (brief)</label><textarea id="a-mot" rows="3" placeholder="Highlight your most relevant experience…"></textarea></div>
+    <div class="fg"><label>CV Link or Notes</label><input id="a-cv" placeholder="LinkedIn URL, Google Drive link, or 'Will email'"></div>
+    <button class="btn-submit" onclick="submitApp()">Submit Application</button>
+  </div>
+</div>
+
+<!-- AI Screening -->
+<div class="overlay" id="screen-overlay">
+  <div class="modal modal-lg">
+    <button class="modal-close" onclick="closeOverlay('screen-overlay')"><i class="ti ti-x"></i></button>
+    <div class="modal-eyebrow">AI Screening Report</div>
+    <h2 id="sc-title">—</h2>
+    <p class="modal-sub" id="sc-co">—</p>
+    <div id="sc-results"></div>
+    <button class="btn-submit" id="sc-print" onclick="window.print()" style="display:none;margin-top:1rem">Print Shortlist Report</button>
+  </div>
+</div>
+
+<!-- Invoice -->
+<div class="overlay" id="inv-overlay">
+  <div class="modal modal-lg">
+    <button class="modal-close" onclick="closeOverlay('inv-overlay')"><i class="ti ti-x"></i></button>
+    <div class="modal-eyebrow">Create Invoice</div>
+    <h2>New Invoice</h2>
+    <div style="margin-top:1.5rem">
+      <div class="form-grid">
+        <div class="fg"><label>Client Company *</label><input id="iv-client" placeholder="Company name"></div>
+        <div class="fg"><label>Contact Person</label><input id="iv-contact" placeholder="HR Manager"></div>
+      </div>
+      <div class="form-grid">
+        <div class="fg"><label>Service</label><select id="iv-service"><option>Job Listing Fee</option><option>AI Screening & Shortlist Report</option><option>Headhunting Service</option><option>Placement Fee</option><option>International Placement</option></select></div>
+        <div class="fg"><label>Amount (E) *</label><input id="iv-amt" type="number" placeholder="5000"></div>
+      </div>
+      <div class="fg"><label>Reference / Notes</label><input id="iv-notes" placeholder="e.g. Job Ref EMA-001, role title…"></div>
+      <button class="btn-submit" onclick="createInvoice()">Generate Invoice</button>
+      <div class="invoice-preview" id="inv-preview"></div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast-el"></div>
+
+<script>
+const PASS='WB@Admin2025';
+let jobs=[
+  {id:1,title:'Facilities Manager',co:'Eswatini Sugar Association',loc:'Simunye',country:'Eswatini',type:'Full-time',ind:'Built Environment',sal:'E28,000–E35,000/month',dl:'2025-08-15',desc:'Lead all facilities operations across the Simunye estate. Oversee civil maintenance, utilities and contractor management for a large agricultural processing site.',reqs:['Diploma in Facilities Management or Civil Engineering','5+ years FM experience','ISO knowledge advantageous','Valid driver\'s licence'],method:'internal',apps:[]},
+  {id:2,title:'Civil Engineer',co:'Ministry of Public Works & Transport',loc:'Mbabane',country:'Eswatini',type:'Full-time',ind:'Government',sal:'E22,000–E30,000/month',dl:'2025-07-30',desc:'Design and supervise civil infrastructure projects including roads, drainage systems and public buildings across Eswatini.',reqs:['BSc Civil Engineering','Professional registration (EEC)','3+ years experience','AutoCAD proficiency'],method:'internal',apps:[]},
+  {id:3,title:'Quantity Surveyor',co:'Tibiyo TakaNgwane',loc:'Mbabane',country:'Eswatini',type:'Contract',ind:'Built Environment',sal:'E18,000–E24,000/month',dl:'2025-07-10',desc:'Cost estimation, bills of quantities and contract administration for a major commercial development in the CBD.',reqs:['Degree or Diploma in Quantity Surveying','3+ years experience','Proficiency in CostX or similar software'],method:'internal',apps:[]},
+  {id:4,title:'HR Generalist',co:'Standard Bank Eswatini',loc:'Manzini',country:'Eswatini',type:'Full-time',ind:'Finance',sal:'E20,000–E26,000/month',dl:'2025-08-20',desc:'Support recruitment, performance management, employee relations and compliance across the bank\'s Eswatini operations.',reqs:['Degree in HR Management or related','3+ years HR experience','Knowledge of the Eswatini Labour Act'],method:'internal',apps:[]},
+  {id:5,title:'Airport Operations Officer',co:'Eswatini Airports Authority',loc:'Sikhuphe',country:'Eswatini',type:'Full-time',ind:'Government',sal:'E16,000–E22,000/month',dl:'2025-09-01',desc:'Ensure safe and efficient daily operations at King Mswati III International Airport in accordance with ICAO and IATA standards.',reqs:['Diploma in Airport Operations or Aviation Management','IATA certification advantageous','2+ years airport experience'],method:'internal',apps:[]}
+];
+let apps=[],invoices=[],nextId=6,nextInv=1,curJob=null,adminIn=false;
+
+function daysLeft(dl){const t=new Date();t.setHours(0,0,0,0);const d=new Date(dl);d.setHours(0,0,0,0);return Math.ceil((d-t)/86400000)}
+function activeJobs(){return jobs.filter(j=>daysLeft(j.dl)>0)}
+
+function renderJobs(list){
+  const active=list!==undefined?list:activeJobs();
+  document.getElementById('jcount').textContent=active.length+' position'+(active.length!==1?'s':'')+' found';
+  updateStats();
+  if(!active.length){document.getElementById('jobs-list').innerHTML='<div class="empty"><i class="ti ti-briefcase-off" aria-hidden="true"></i><p>No positions match your search. Try different filters.</p></div>';return}
+  document.getElementById('jobs-list').innerHTML=active.map(j=>{
+    const d=daysLeft(j.dl);const urg=d<=5;
+    return`<div class="job-card" onclick="openJobModal(${j.id})">
+      <div>
+        <div class="jc-company">${j.co}</div>
+        <div class="jc-title">${j.title}</div>
+        <div class="jc-tags">
+          <span class="tag tag-type">${j.type}</span>
+          <span class="tag tag-loc"><i class="ti ti-map-pin" style="font-size:10px;margin-right:2px"></i>${j.loc}</span>
+          <span class="tag tag-ind">${j.ind}</span>
+          ${urg?'<span class="tag tag-urgent"><i class="ti ti-clock" style="font-size:10px;margin-right:2px"></i>Closing soon</span>':''}
+        </div>
+      </div>
+      <div class="jc-right">
+        <div class="deadline-box">
+          <span class="deadline-num${urg?' urgent':''}">${d}</span>
+          <span class="deadline-lbl">days left</span>
+        </div>
+        <div class="jc-salary">Salary <strong>${j.sal}</strong></div>
+        ${j.method==='internal'
+          ?`<button class="btn-apply" onclick="event.stopPropagation();openApply(${j.id})">Apply Now</button>`
+          :`<button class="btn-ext" onclick="event.stopPropagation();toast('Redirecting to company website…','')"><i class="ti ti-external-link" style="margin-right:4px"></i>Apply on Site</button>`}
+      </div>
+    </div>`
+  }).join('')
+}
+
+function filterJobs(){
+  const q=document.getElementById('sq').value.toLowerCase();
+  const co=document.getElementById('sf-country').value;
+  const ty=document.getElementById('sf-type').value;
+  const ind=document.getElementById('sf-ind').value;
+  renderJobs(activeJobs().filter(j=>
+    (!q||j.title.toLowerCase().includes(q)||j.co.toLowerCase().includes(q)||j.ind.toLowerCase().includes(q))
+    &&(!co||j.country===co)&&(!ty||j.type===ty)&&(!ind||j.ind===ind)
+  ))
+}
+
+function openJobModal(id){
+  const j=jobs.find(x=>x.id===id);if(!j)return;
+  const d=daysLeft(j.dl);
+  document.getElementById('job-modal-body').innerHTML=`
+    <div class="modal-eyebrow">${j.ind}</div>
+    <h2>${j.title}</h2>
+    <p class="modal-sub">${j.co} &bull; ${j.loc}, ${j.country}</p>
+    <div class="modal-meta">
+      <div class="meta-item"><label>Type</label><strong>${j.type}</strong></div>
+      <div class="meta-item"><label>Salary</label><strong>${j.sal}</strong></div>
+      <div class="meta-item"><label>Closing date</label><strong style="color:${d<=5?'var(--danger)':'inherit'}">${d} days remaining</strong></div>
+      <div class="meta-item"><label>Location</label><strong>${j.loc}</strong></div>
+    </div>
+    <div class="modal-section"><h4>About the role</h4><p>${j.desc}</p></div>
+    <div class="modal-section"><h4>Minimum requirements</h4><ul>${j.reqs.map(r=>`<li>${r}</li>`).join('')}</ul></div>
+    <hr class="modal-divider">
+    ${j.method==='internal'
+      ?`<button class="btn-submit" onclick="closeOverlay('job-overlay');openApply(${j.id})">Apply for This Position</button>`
+      :`<button class="btn-submit" onclick="toast('Redirecting to company website…','')">Apply on Company Website <i class='ti ti-external-link'></i></button>`}`;
+  openOverlay('job-overlay')
+}
+
+function openApply(id){
+  const j=jobs.find(x=>x.id===id);if(!j)return;
+  curJob=id;
+  document.getElementById('apl-title').textContent=j.title;
+  document.getElementById('apl-co').textContent=j.co;
+  ['a-fn','a-ln','a-em','a-ph','a-role','a-mot','a-cv'].forEach(i=>document.getElementById(i).value='');
+  openOverlay('apply-overlay')
+}
+
+function submitApp(){
+  const fn=document.getElementById('a-fn').value.trim();
+  const ln=document.getElementById('a-ln').value.trim();
+  const em=document.getElementById('a-em').value.trim();
+  const ph=document.getElementById('a-ph').value.trim();
+  if(!fn||!ln||!em||!ph){toast('Please complete all required fields','err');return}
+  apps.push({id:Date.now(),jobId:curJob,name:fn+' '+ln,email:em,phone:ph,
+    qual:document.getElementById('a-qual').value,exp:document.getElementById('a-exp').value,
+    role:document.getElementById('a-role').value,mot:document.getElementById('a-mot').value,
+    cv:document.getElementById('a-cv').value,date:new Date().toLocaleDateString('en-ZA'),screened:false});
+  closeOverlay('apply-overlay');
+  toast('Application submitted. We will be in touch.','ok');
+  updateStats()
+}
+
+function updateStats(){
+  const a=activeJobs().length;
+  const cos=[...new Set(jobs.map(j=>j.co))].length;
+  document.getElementById('hs-active').textContent=a;
+  document.getElementById('hs-cos').textContent=cos;
+  document.getElementById('hs-apps').textContent=apps.length;
+  if(adminIn){
+    document.getElementById('kpi-active').textContent=a;
+    document.getElementById('kpi-expired').textContent=jobs.length-a;
+    document.getElementById('kpi-apps').textContent=apps.length;
+    document.getElementById('kpi-clients').textContent=cos;
+  }
+}
+
+function doLogin(){
+  if(document.getElementById('admin-pw').value===PASS){
+    document.getElementById('admin-gate').style.display='none';
+    document.getElementById('admin-dash').style.display='block';
+    adminIn=true;
+    document.getElementById('dash-date').textContent=new Date().toLocaleDateString('en-ZA',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+    updateStats();renderAdminJobs();renderAdminApps();renderAdminInvs()
+  }else toast('Incorrect password','err')
+}
+
+function renderAdminJobs(){
+  const el=document.getElementById('admin-jobs');
+  if(!jobs.length){el.innerHTML='<div class="empty"><i class="ti ti-briefcase" aria-hidden="true"></i><p>No jobs posted yet.</p></div>';return}
+  el.innerHTML=`<table class="atable"><thead><tr><th>Title</th><th>Company</th><th>Type</th><th>Deadline</th><th>Apps</th><th>Status</th><th>Actions</th></tr></thead><tbody>
+  ${jobs.map(j=>{const d=daysLeft(j.dl);const ac=d>0;const ac2=apps.filter(a=>a.jobId===j.id).length;return`<tr>
+    <td><strong>${j.title}</strong></td><td style="color:var(--ink3)">${j.co}</td><td>${j.type}</td>
+    <td style="color:${d<=5&&ac?'var(--danger)':'inherit'}">${j.dl}</td>
+    <td><strong>${ac2}</strong></td>
+    <td><span class="badge ${ac?'badge-active':'badge-expired'}">${ac?'Active':'Expired'}</span></td>
+    <td><div class="td-acts">
+      ${ac2>0?`<button class="btn-screen" onclick="runScreen(${j.id})"><i class="ti ti-brain" style="margin-right:4px"></i>Screen</button>`:''}
+      <button class="btn-icon danger" onclick="delJob(${j.id})" aria-label="Delete"><i class="ti ti-trash"></i></button>
+    </div></td>
+  </tr>`}).join('')}</tbody></table>`
+}
+
+function delJob(id){jobs=jobs.filter(j=>j.id!==id);renderAdminJobs();renderJobs();updateStats();toast('Listing removed','')}
+
+function openAddForm(){document.getElementById('add-form').classList.add('open');document.getElementById('add-form').scrollIntoView({behavior:'smooth',block:'start'});const t=new Date();t.setDate(t.getDate()+30);document.getElementById('nj-dl').value=t.toISOString().split('T')[0]}
+function closeAddForm(){document.getElementById('add-form').classList.remove('open')}
+function toggleExt(){document.getElementById('ext-wrap').style.display=document.getElementById('nj-method').value==='external'?'block':'none'}
+
+function saveJob(){
+  const title=document.getElementById('nj-title').value.trim();
+  const co=document.getElementById('nj-co').value.trim();
+  const dl=document.getElementById('nj-dl').value;
+  if(!title||!co||!dl){toast('Title, company and deadline are required','err');return}
+  const reqs=document.getElementById('nj-reqs').value.split('\n').filter(r=>r.trim());
+  jobs.push({id:nextId++,title,co,loc:document.getElementById('nj-loc').value||'Eswatini',
+    country:document.getElementById('nj-country').value,type:document.getElementById('nj-type').value,
+    ind:document.getElementById('nj-ind').value,sal:document.getElementById('nj-sal').value||'Competitive',
+    dl,desc:document.getElementById('nj-desc').value,reqs:reqs.length?reqs:['See job description'],
+    method:document.getElementById('nj-method').value,exturl:document.getElementById('nj-exturl').value,apps:[]});
+  closeAddForm();renderAdminJobs();renderJobs();updateStats();toast('Job posted successfully!','ok');
+  ['nj-title','nj-co','nj-loc','nj-sal','nj-desc','nj-reqs','nj-exturl'].forEach(i=>document.getElementById(i).value='')
+}
+
+function renderAdminApps(){
+  const fv=document.getElementById('app-filter').value;
+  const sel=document.getElementById('app-filter');
+  sel.innerHTML='<option value="">All jobs</option>'+jobs.map(j=>`<option value="${j.id}">${j.title}</option>`).join('');
+  if(fv)sel.value=fv;
+  const list=fv?apps.filter(a=>a.jobId==fv):apps;
+  const el=document.getElementById('admin-apps');
+  if(!list.length){el.innerHTML='<div class="empty"><i class="ti ti-users" aria-hidden="true"></i><p>No applications received yet.</p></div>';return}
+  el.innerHTML=`<table class="atable"><thead><tr><th>Applicant</th><th>Position</th><th>Experience</th><th>Qualification</th><th>Date</th><th>Status</th></tr></thead><tbody>
+  ${list.map(a=>{const j=jobs.find(x=>x.id===a.jobId);return`<tr>
+    <td><strong>${a.name}</strong><br><span style="font-size:12px;color:var(--ink3)">${a.email}</span></td>
+    <td style="color:var(--ink3)">${j?j.title:'—'}</td>
+    <td>${a.exp}</td><td>${a.qual}</td><td>${a.date}</td>
+    <td><span class="badge ${a.screened?'badge-screened':'badge-pending'}">${a.screened?'Screened':'Pending'}</span></td>
+  </tr>`}).join('')}</tbody></table>`
+}
+
+async function runScreen(jobId){
+  const j=jobs.find(x=>x.id===jobId);
+  const ja=apps.filter(a=>a.jobId===jobId);
+  if(!ja.length){toast('No applications for this job yet','');return}
+  document.getElementById('sc-title').textContent=j.title;
+  document.getElementById('sc-co').textContent=j.co;
+  document.getElementById('sc-results').innerHTML='<div class="loading-row"><div class="pulse"></div><div class="pulse"></div><div class="pulse"></div><span>Claude AI is screening candidates against your requirements…</span></div>';
+  document.getElementById('sc-print').style.display='none';
+  openOverlay('screen-overlay');
+  try{
+    const prompt=`You are a professional recruitment screener for EMATOHO Recruitment (Eswatini). Screen applicants against the job and return ONLY a valid JSON array with no other text.
+
+JOB: ${j.title} at ${j.co}
+REQUIREMENTS: ${j.reqs.join('; ')}
+
+APPLICANTS:
+${ja.map((a,i)=>`${i+1}. Name: ${a.name}, Qualification: ${a.qual}, Experience: ${a.exp}, Current Role: ${a.role||'Not stated'}, Statement: ${a.mot||'Not provided'}`).join('\n')}
+
+Return JSON array: [{name,score(0-100),recommendation("Strongly Recommend"|"Recommend"|"Consider"|"Not Suitable"),reason(1 sentence)}]`;
+    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:prompt}]})});
+    const data=await res.json();
+    const txt=data.content.map(c=>c.text||'').join('');
+    const results=JSON.parse(txt.replace(/```json|```/g,'').trim());
+    ja.forEach(a=>{a.screened=true});
+    const sorted=results.sort((a,b)=>b.score-a.score);
+    document.getElementById('sc-results').innerHTML=sorted.map((r,i)=>{
+      const cls=r.score>=75?'hi':r.score>=50?'md':'lo';
+      return`<div class="sr-item">
+        <div class="sr-top">
+          <div><div class="sr-name">#${i+1} ${r.name}</div><div class="sr-rank">${r.recommendation}</div><div class="sr-rec">${r.reason}</div></div>
+          <div class="sr-score ${cls}">${r.score}<br><span style="font-size:11px;font-family:'DM Sans',sans-serif;letter-spacing:1px">/100</span></div>
+        </div>
+        <div class="sr-bar"><div class="sr-fill ${cls}" style="width:${r.score}%"></div></div>
+      </div>`
+    }).join('');
+    document.getElementById('sc-print').style.display='block';
+    renderAdminApps()
+  }catch(e){document.getElementById('sc-results').innerHTML='<p style="color:var(--danger);font-size:14px;padding:1rem 0">Screening failed. Please check your connection and try again.</p>'}
+}
+
+function renderAdminInvs(){
+  const el=document.getElementById('admin-invs');
+  if(!invoices.length){el.innerHTML='<div class="empty"><i class="ti ti-receipt" aria-hidden="true"></i><p>No invoices yet.</p></div>';return}
+  el.innerHTML=`<table class="atable"><thead><tr><th>Invoice</th><th>Client</th><th>Service</th><th>Amount</th><th>Date</th><th>Status</th></tr></thead><tbody>
+  ${invoices.map(iv=>`<tr>
+    <td><strong>EMA-${String(iv.id).padStart(3,'0')}</strong></td>
+    <td>${iv.client}</td>
+    <td style="color:var(--ink3)">${iv.service}</td>
+    <td><strong>E${Number(iv.amt).toLocaleString()}</strong></td>
+    <td>${iv.date}</td>
+    <td><span class="badge badge-pending">Sent</span></td>
+  </tr>`).join('')}</tbody></table>`
+}
+
+function createInvoice(){
+  const client=document.getElementById('iv-client').value.trim();
+  const amt=document.getElementById('iv-amt').value;
+  if(!client||!amt){toast('Client and amount are required','err');return}
+  const iv={id:nextInv++,client,contact:document.getElementById('iv-contact').value,service:document.getElementById('iv-service').value,amt,notes:document.getElementById('iv-notes').value,date:new Date().toLocaleDateString('en-ZA')};
+  invoices.push(iv);
+  const num=`EMA-${String(iv.id).padStart(3,'0')}`;
+  document.getElementById('inv-preview').style.display='block';
+  document.getElementById('inv-preview').innerHTML=`
+    <div class="inv-header">
+      <div><div class="inv-logo-text">EMATOHO</div><div class="inv-logo-sub">Recruitment & Staffing Solutions</div></div>
+      <div class="inv-meta"><strong>Invoice ${num}</strong><br>Date: ${iv.date}<br>Due: 30 days from date</div>
+    </div>
+    <div style="font-size:13px;margin-bottom:1rem;color:var(--ink2)"><strong>Bill To:</strong><br>${iv.client}${iv.contact?'<br>'+iv.contact:''}</div>
+    <table class="inv-table"><thead><tr><th>Service</th><th>Description / Reference</th><th>Amount</th></tr></thead>
+    <tbody><tr><td>${iv.service}</td><td style="color:var(--ink3)">${iv.notes||'—'}</td><td><strong>E${Number(iv.amt).toLocaleString()}</strong></td></tr></tbody></table>
+    <div class="inv-total-row">Total Due: E${Number(iv.amt).toLocaleString()}</div>
+    <div class="inv-footer">EMATOHO Recruitment &bull; simconptyltd@gmail.com &bull; +268 7613 7401 &bull; Payment: EFT or Cash<br>Thank you for your business.</div>`;
+  renderAdminInvs();toast('Invoice '+num+' created!','ok')
+}
+
+function switchTab(btn,panelId){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById(panelId).classList.add('active');
+  if(panelId==='tp-apps')renderAdminApps();
+}
+
+function goto(name){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('pg-'+name).classList.add('active');
+  if(name==='home')renderJobs();
+  window.scrollTo(0,0)
+}
+function navActive(btn){document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active')}
+
+function openOverlay(id){document.getElementById(id).style.display='block';document.body.style.overflow='hidden'}
+function closeOverlay(id){document.getElementById(id).style.display='none';document.body.style.overflow=''}
+document.querySelectorAll('.overlay').forEach(o=>o.addEventListener('click',e=>{if(e.target===o)closeOverlay(o.id)}));
+
+function toast(msg,type){const el=document.getElementById('toast-el');el.textContent=msg;el.className='toast show'+(type?' '+type:'');setTimeout(()=>el.className='toast',3500)}
+
+renderJobs();
+updateStats();
+</script>
+</html>
